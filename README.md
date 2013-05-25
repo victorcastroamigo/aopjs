@@ -87,11 +87,27 @@ Advices can also be precompiled, but it is just a matter of taste, when not prec
 ```javascript    
     var myAdvice = AOP.around(function(target, args) {
 
-            // do something
+            var retval;
 
-            target.apply(this, args); // target invocation
+            // do something before
 
-            // do something else
+            try {
+
+                retval = target.apply(this, args); // target invocation
+
+                // do something after returning
+
+            } catch (e) {
+
+                // do something after throwing
+
+                throw e;
+            } finally {
+
+                // do something after
+            }
+
+            return retval
         });
 
     var myProxy = AOP.aspect(myFunction).advice(myAdvice);
@@ -99,18 +115,18 @@ Advices can also be precompiled, but it is just a matter of taste, when not prec
 
 In the previous example an around advice is used to do something before and after a target function. It should be noted that the target function invocation is handled in pure javascript syntax to keep things as simple as possible.
 
-Other types of advices have access to target and args too
+Other types of advices have access to target, args and retval too
 
 #####Input
-```javascript    
-
-    var myProxy = AOP.aspect(function (arg1, arg2) {
-            console.log(arg1 + arg2);
-        }).before(function(target, args) {
-            console.log(args[0] + ' + ' + args[1] + ' = ');
-        });
-
-    myProxy(2, 3);
+```javascript
+    var add = AOP.aspect(function (arg1, arg2) {
+            return arg1 + arg2;
+        }).before(function (target, args) {
+            console.log(args[0] + " + " + args[1] + " = ");
+        }).after(function (target, args, retval) {
+            console.log(retval);
+        }),
+        returnValue = add(2, 3); // returnValue == 5
 ```
 #####Output
 ```

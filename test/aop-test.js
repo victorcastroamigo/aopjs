@@ -372,17 +372,101 @@ test("object", function test() {
         ["return", "before", "return", "afterReturning", "before", "afterThrowing"]);
 });
 
+test("this", function test() {
+
+    "use strict";
+
+    var myObject = {
+            myProperty: "myProperty",
+            myMethod: function () {
+                AOP.test.pushResult(this.myProperty);
+            }
+        },
+        myFunction = AOP.aspect(myObject.myMethod, myObject).before(AOP.test.pushBefore);
+
+    myFunction("myargs");
+
+    AOP.aspect(myObject).after(AOP.test.pushAfter);
+
+    myObject.myMethod();
+
+    deepEqual(AOP.test.getResults(), ["before", "myProperty", "myProperty", "after"]);
+});
+
 test("arguments", function test() {
 
     "use strict";
 
     var before = AOP.before(AOP.test.pushArguments),
         beforeAfter = AOP.advice(before).after(AOP.test.pushArguments),
-        testFunction = AOP.aspect(AOP.test.pushReturn)
+        myFunction = AOP.aspect(AOP.test.pushReturn)
                                     .advice(beforeAfter)
-                                    .afterReturning(AOP.test.pushArguments);
+                                    .afterReturning(AOP.test.pushArguments),
+        myThrowingFunction = AOP.aspect(AOP.test.throwError)
+                                    .afterThrowing(AOP.test.pushArguments);
 
-    testFunction("myargs");
+    myFunction("myArgs");
+    try {
+        myThrowingFunction("myArgs");
+    } catch (e) {
+        // do nothing
+    }
 
-    deepEqual(AOP.test.getResults(), ["myargs", "return", "myargs", "myargs"]);
+    deepEqual(AOP.test.getResults(), ["myArgs", "return", "myArgs", "myArgs", "myArgs"]);
+});
+
+test("return value", function test() {
+
+    "use strict";
+
+    var myObject = {
+            myProperty: "myProperty",
+            myMethod: AOP.aspect(function () {
+                return "myReturnValue";
+            }).before(AOP.test.pushBefore)
+            .around(AOP.test.pushAround)
+            .afterReturning(AOP.test.pushReturnValue)
+            .after(AOP.test.pushReturnValue)
+        }, returnValue = myObject.myMethod();
+
+    deepEqual(returnValue, "myReturnValue");
+    deepEqual(AOP.test.getResults(),
+        ["before", "before", "afterReturning", "after", "myReturnValue", "myReturnValue"]);
+});
+
+test("return value", function test() {
+
+    "use strict";
+
+    var myObject = {
+            myProperty: "myProperty",
+            myMethod: AOP.aspect(function () {
+                return "myReturnValue";
+            }).before(AOP.test.pushBefore)
+            .around(AOP.test.pushAround)
+            .afterReturning(AOP.test.pushReturnValue)
+            .after(AOP.test.pushReturnValue)
+        }, returnValue = myObject.myMethod();
+
+    deepEqual(returnValue, "myReturnValue");
+    deepEqual(AOP.test.getResults(),
+        ["before", "before", "afterReturning", "after", "myReturnValue", "myReturnValue"]);
+});
+
+test("readme", function test() {
+
+    "use strict";
+
+    var add = AOP.aspect(function (arg1, arg2) {
+            return arg1 + arg2;
+        }).before(function (target, args) {
+            AOP.test.pushResult(args[0] + " + " + args[1] + " = ");
+        }).after(function (target, args, retval) {
+            AOP.test.pushResult("" + retval);
+        }),
+        returnValue = add(2, 3); // returnValue == 5
+
+    deepEqual(returnValue, 5);
+    deepEqual(AOP.test.getResults(),
+        ["2 + 3 = ", "5"]);
 });

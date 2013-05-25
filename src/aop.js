@@ -23,7 +23,7 @@
                 return function () {
                     advice.call(this, target, arguments);
                     // provides access to target and arguments inside the advice
-                    target.apply(this, arguments);
+                    return target.apply(this, arguments);
                 };
             };
             advice[cacheProperty] = beforeAdvice;
@@ -40,10 +40,12 @@
         if (!afterAdvice) {
             afterAdvice = function (target) {
                 return function () {
+                    var returnValue;
                     try {
-                        target.apply(this, arguments);
+                        returnValue = target.apply(this, arguments);
+                        return returnValue;
                     } finally {
-                        advice.call(this, target, arguments);
+                        advice.call(this, target, arguments, returnValue);
                         // provides access to target and arguments inside the advice
                     }
                 };
@@ -62,8 +64,9 @@
         if (!afterReturningAdvice) {
             afterReturningAdvice = function (target) {
                 return function () {
-                    target.apply(this, arguments);
-                    advice.call(this, target, arguments);
+                    var returnValue = target.apply(this, arguments);
+                    advice.call(this, target, arguments, returnValue);
+                    return returnValue;
                     // provides access to target and arguments inside the advice
                 };
             };
@@ -82,7 +85,7 @@
             afterThrowingAdvice = function (target) {
                 return function () {
                     try {
-                        target.apply(this, arguments);
+                        return target.apply(this, arguments);
                     } catch (e) {
                         advice.call(this, target, arguments);
                         // provides access to target and arguments inside the advice
@@ -104,7 +107,7 @@
         if (!aroundAdvice) {
             aroundAdvice = function (target) {
                 return function () {
-                    advice.call(this, target, arguments);
+                    return advice.call(this, target, arguments);
                 };
             };
             advice[cacheProperty] = aroundAdvice;
@@ -183,7 +186,7 @@
     function executionJoinPoint(target, caller) {
 
         function proceedingJoinPoint() {
-            target.apply(caller, arguments);
+            return target.apply(caller, arguments);
         }
 
         function adviceMetaFactory(adviceFactory) {

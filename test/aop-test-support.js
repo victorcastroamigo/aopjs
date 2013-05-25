@@ -19,6 +19,10 @@
         pushResult(args[0]);
     }
 
+    function pushReturnValue(target, args, retval) {
+        pushResult(retval);
+    }
+
     function pushBefore() {
         pushResult("before");
     }
@@ -39,8 +43,9 @@
         try {
             pushBefore();
             /*jshint validthis:true */
-            target.apply(this, args);
+            var returnValue = target.apply(this, args);
             pushAfterReturning();
+            return returnValue;
         } catch (e) {
             pushAfterThrowing();
             throw e;
@@ -68,6 +73,7 @@
         AOP.test.pushReturn = pushReturn;
         AOP.test.throwError = throwError;
         AOP.test.pushArguments = pushArguments;
+        AOP.test.pushReturnValue = pushReturnValue;
 
         AOP.test.pushBefore = pushBefore;
         AOP.test.pushAfter = pushAfter;
