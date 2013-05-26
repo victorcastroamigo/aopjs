@@ -1,7 +1,18 @@
-## AopJS
+## AopJS [![Build Status](https://travis-ci.org/victorcastroamigo/aopjs.png?branch=master)](https://travis-ci.org/victorcastroamigo/aopjs)
+
 ###### A minimalistic aspect oriented javascript programming library and jQuery plugin.
 
 #### Getting started
+
+Add the script to your page as a standalone library **OR** after jQuery if you plan to use it as a plugin.
+
+```html
+    <!-- standalone-->
+    <script src="../aop-0.5.1.min.js"></script>
+
+    <!-- OR as jQuery plugin -->
+    <script src="../jquery-aop-0.5.1.min.js"></script>
+```
 
 Functionallity is accesible in the global variable AOP if used as a standalone library or in $.aop if used as a jQuery plugin.
 

@@ -49,8 +49,8 @@ module.exports = function (grunt) {
             },
             all: {
                 files: {
-                    "<%= concat.basic.dest %>.min.js": ["<%= concat.basic.dest %>"],                    
-                    "<%= concat.extras.dest %>.min.js": ["<%= concat.extras.dest %>"]
+                    "dist/<%= pkg.name %>-<%= pkg.version %>.min.js": ["<%= concat.basic.dest %>"],                    
+                    "dist/jquery-<%= pkg.name %>-<%= pkg.version %>.min.js": ["<%= concat.extras.dest %>"]
                 }
             }
         },

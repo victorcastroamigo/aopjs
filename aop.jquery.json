@@ -5,6 +5,7 @@
   "keywords": [ "javascript", "js", "jquery", "library", "plugin", "aop", "aspect", "advice" ],
   "version": "0.5.0",
   "homepage": "https://github.com/victorcastroamigo/aopjs",
+  "download": "https://raw.github.com/victorcastroamigo/aopjs/0.5.0/dist/jquery-aop-0.5.0.min.js",
   "docs": "https://github.com/victorcastroamigo/aopjs",
   "author": {
     "name": "Víctor Castro Amigo",
