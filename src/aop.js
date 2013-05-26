@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var AOP = {};
+    var AOP = {}, preexistingAOP;
 
     //
     // Advice
@@ -215,9 +215,12 @@
         proceedingJoinPoint.advice = adviceMetaFactory(precompiledFactory);
         proceedingJoinPoint.around = adviceMetaFactory(aroundFactory);
         proceedingJoinPoint.before = adviceMetaFactory(beforeFactory);
-        proceedingJoinPoint.after = adviceMetaFactory(afterFactory);
-        proceedingJoinPoint.afterReturning = adviceMetaFactory(afterReturningFactory);
-        proceedingJoinPoint.afterThrowing = adviceMetaFactory(afterThrowingFactory);
+        proceedingJoinPoint.after =
+            proceedingJoinPoint.complete = adviceMetaFactory(afterFactory);
+        proceedingJoinPoint.afterReturning =
+            proceedingJoinPoint.success = adviceMetaFactory(afterReturningFactory);
+        proceedingJoinPoint.afterThrowing =
+            proceedingJoinPoint.error = adviceMetaFactory(afterThrowingFactory);
 
         return proceedingJoinPoint;
     }
@@ -248,15 +251,29 @@
         return joinPoint;
     }
 
+    //
+    // Plumbing
+    //
+
+    function noConflict() {
+        if (global.AOP === AOP) {
+            global.AOP = preexistingAOP;
+        }
+        return AOP;
+    }
+
     AOP.around = aroundFactory;
     AOP.before = beforeFactory;
-    AOP.after = afterFactory;
-    AOP.afterReturning = afterReturningFactory;
-    AOP.afterThrowing = afterThrowingFactory;
+    AOP.after = AOP.complete = afterFactory;
+    AOP.afterReturning = AOP.success = afterReturningFactory;
+    AOP.afterThrowing = AOP.error = afterThrowingFactory;
 
     AOP.aspect = aspect;
     AOP.advice = advice;
 
+    AOP.noConflict = noConflict;
+
+    preexistingAOP = global.AOP;
     global.AOP = AOP;
 
 })(this);

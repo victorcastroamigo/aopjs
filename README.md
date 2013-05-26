@@ -1,9 +1,11 @@
 ## AopJS
-###### A minimalistic aspect oriented javascript programming library and jQuery plugin
+###### A minimalistic aspect oriented javascript programming library and jQuery plugin.
 
 #### Getting started
 
-An aspect definition takes a target function and some advices, returning a new function with the new expected behaviour
+Functionallity is accesible in the global variable AOP if used as a standalone library or in $.aop if used as a jQuery plugin.
+
+An aspect definition takes a target function and some advices, returning a new function with the new expected behaviour.
 
 #####Input
 ```javascript
@@ -28,7 +30,7 @@ myAdvice
 myFunction
 ```
 
-Advices can be of type *before*, *after*, *afterReturning*, *afterThrowing* and *around*.
+Advices can be of type *before*, *after*, *afterReturning*, *afterThrowing* and *around*. The next jQuery friendly aliases are provided: *complete* (after), *success* (afterReturning) and *error* (afterThrowing).
 
 Aspect definitions can also take a target object method. In that case we provide also the target object to allow the normal use of *this* inside the method.
 
@@ -72,7 +74,8 @@ myOtherMethod
 myAdvice
 ```
 
-Advices can be chained, the closest to the target function in the definition is also the closest in runtime.
+Advices can be chained, being the closest to the target function in the definition  also the closest in the execution stack.
+
 #####Input
 ```javascript
     var myProxy = AOP.aspect(myFunction)
@@ -115,7 +118,7 @@ Advices can also be precompiled, but it is just a matter of taste, when not prec
 
 In the previous example an around advice is used to do something before and after a target function. It should be noted that the target function invocation is handled in pure javascript syntax to keep things as simple as possible.
 
-Other types of advices have access to target, args and retval too
+Other types of advices have access to target, args and retval too.
 
 #####Input
 ```javascript
@@ -131,4 +134,65 @@ Other types of advices have access to target, args and retval too
 #####Output
 ```
 2 + 3 = 5
+```
+
+#### Advanced usage
+
+Every advice definition method can take a variable number of functions.
+
+#####Input
+```javascript
+    var myProxy = AOP.aspect(myFunction)
+                        .after(myAdvice1, myAdvice2),
+        myProxy2 = AOP.aspect(myFunction)
+                        .after(myAdvice1)
+                        .after(myAdvice2);
+```
+
+Both calls in the previous example produce the same output. Also remember that myAdvice1 will be invoked before myAdvice2 as the closest advice to the aspect will create the inner most proxy in the execution stack. 
+
+As stated earlier, precompiling the advices is not a matter of performance but a matter of taste. Still it is rather useful to create advice compositions.
+
+#####Input
+```javascript
+
+    var aroundComposite = AOP.advice()
+                                .before(myAdvice1)
+                                .afterReturning(myAdvice2)
+                                .afterThrowing(myAdvice3)
+                                .after(myAdvice4)
+                                .around(myAdvice5),
+        // alternative syntax                        
+        beforePrecompiled = AOP.before(myAdvice1),
+        afterReturningPrecompiled = AOP.afterReturning(myAdvice2),
+        afterThrowingPrecompiled = AOP.afterThrowing(myAdvice3),
+        afterPrecompiled = AOP.after(myAdvice4),
+        aroundPrecompiled = AOP.around(myAdvice5),
+        aroundPrecompiledComposite = AOP.advice(beforePrecompiled,
+                                                    afterReturningPrecompiled,
+                                                    afterThrowingPrecompiled,
+                                                    afterPrecompiled,
+                                                    aroundPrecompiled),
+        myProxy = AOP.aspect(myFunction).advice(aroundComposite),
+        myProxy2 = AOP.aspect(myFunction).advice(aroundPrecompiledComposite);
+```
+
+In the previous example both the aroundComposite and the aroundPrecompiledComposite have the same behaviour, they are just syntactic alternatives to create a precompiled advice with the compound behaviour of all the provided advices.
+
+Another advanced technique would be the use of currying to create parameterized advices.
+
+#####Input
+```javascript
+    function logAdvice(logger) {
+        return logger.log("logAdvice");
+    }
+    var consoleLogAdvice = logAdvice.curry(console),
+        myProxy = AOP.aspect(myFunction)
+                        .after(consoleLogAdvice);
+
+    myProxy();
+```
+#####Output
+```
+logAdvice
 ```

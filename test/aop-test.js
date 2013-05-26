@@ -470,3 +470,42 @@ test("readme", function test() {
     deepEqual(AOP.test.getResults(),
         ["2 + 3 = ", "5"]);
 });
+
+test("currying", function test() {
+
+    "use strict";
+
+    var consoleLogAdvice, curryTest;
+
+    Function.prototype.method = function (name, func) {
+        if (!this.prototype[name]) {
+            this.prototype[name] = func;
+            return this;
+        }
+    };
+
+    Function.method("curry", function () {
+        var slice = Array.prototype.slice,
+            args = slice.apply(arguments),
+            that = this;
+        return function () {
+            return that.apply(null, args.concat(slice.apply(arguments)));
+        };
+    });
+
+    function logAdvice(logger) {
+        return logger.log("logAdvice");
+    }
+
+    consoleLogAdvice = logAdvice.curry({
+        log: function (arg) {
+            AOP.test.pushResult(arg);
+        }
+    });
+
+    curryTest = AOP.aspect(AOP.test.pushReturn).before(consoleLogAdvice);
+
+    curryTest();
+
+    deepEqual(AOP.test.getResults(), ["logAdvice", "return"]);
+});

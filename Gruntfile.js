@@ -30,9 +30,13 @@ module.exports = function (grunt) {
                 separator: ";",
                 banner: "/*! <%= pkg.title || pkg.name %> <%= pkg.version %> - (c) <%= grunt.template.today(\"yyyy\") %> <%= pkg.author.name %> - <%= _.pluck(pkg.licenses, \"type\").join(\", \") %> License */\n"
             },
-            dist: {
-                src: ["src/**/*.js"],
-                dest: "dist/<%= pkg.name %>-<%= pkg.version %>.js"
+            basic: {
+              src: ["src/aop.js"],
+              dest: "dist/<%= pkg.name %>-<%= pkg.version %>.js"
+            },
+            extras: {
+              src: ["src/aop.js", "src/jquery-aop.js"],
+              dest: 'dist/jquery-<%= pkg.name %>-<%= pkg.version %>.js'
             }
         },
 
@@ -45,7 +49,8 @@ module.exports = function (grunt) {
             },
             all: {
                 files: {
-                    "dist/<%= pkg.name %>-<%= pkg.version %>.min.js": ["<%= concat.dist.dest %>"]
+                    "<%= concat.basic.dest %>.min.js": ["<%= concat.basic.dest %>"],                    
+                    "<%= concat.extras.dest %>.min.js": ["<%= concat.extras.dest %>"]
                 }
             }
         },
