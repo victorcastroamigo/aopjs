@@ -1,0 +1,46 @@
+{
+  "name": "aop",
+  "title": "AopJS",
+  "description": "A simple javascript aspect oriented programming library and jquery plugin",
+  "keywords": [ "javascript", "js", "jquery", "library", "plugin", "aop", "aspect", "advice" ],
+  "version": "0.5.0",
+  "homepage": "https://github.com/victorcastroamigo/aopjs",
+  "docs": "https://github.com/victorcastroamigo/aopjs",
+  "author": {
+    "name": "Víctor Castro Amigo",
+    "email": "victorcastroamigo@gmail.com",
+    "url": "https://github.com/victorcastroamigo"
+  },
+  "maintainers": [
+    {
+      "name": "Víctor Castro Amigo",
+      "email": "victorcastroamigo@gmail.com",
+      "url": "https://github.com/victorcastroamigo"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/victorcastroamigo/aopjs.git"
+  },
+  "bugs": "https://github.com/victorcastroamigo/aopjs/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/victorcastroamigo/aopjs/blob/master/LICENSE.txt"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.5"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.5.2",
+    "grunt-contrib-qunit": "~0.2.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.4.3"
+  },
+  "scripts": {
+  	"test": "grunt travis --verbose"
+  }
+}
