@@ -1,4 +1,4 @@
-/*! AopJS 0.5.1 - (c) 2013 Víctor Castro Amigo - MIT License */
+/*! AopJS 0.5.3 - (c) 2013 Víctor Castro Amigo - MIT License */
 (function (global, undefined) {
 
     "use strict";

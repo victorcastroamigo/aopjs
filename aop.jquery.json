@@ -3,9 +3,9 @@
   "title": "AopJS",
   "description": "A simple javascript aspect oriented programming library and jquery plugin",
   "keywords": [ "javascript", "js", "jquery", "library", "plugin", "aop", "aspect", "advice" ],
-  "version": "0.5.2",
+  "version": "0.5.3",
   "homepage": "https://github.com/victorcastroamigo/aopjs",
-  "download": "https://raw.github.com/victorcastroamigo/aopjs/0.5.2/dist/jquery-aop-0.5.2.min.js",
+  "download": "https://raw.github.com/victorcastroamigo/aopjs/0.5.3/dist/jquery-aop-0.5.3.min.js",
   "docs": "https://github.com/victorcastroamigo/aopjs",
   "author": {
     "name": "Víctor Castro Amigo",
