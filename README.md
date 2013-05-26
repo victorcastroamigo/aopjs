@@ -4,13 +4,13 @@
 
 #### Getting started
 
-Add the script to your page as a standalone library **OR** after jQuery if you plan to use it as a plugin.
+Add the script to your page as a standalone library **OR** after jQuery if you plan to use it as a plugin. You can download it from the dist folder.
 
 ```html
     <!-- standalone-->
     <script src="../aop-0.5.1.min.js"></script>
 
-    <!-- OR as jQuery plugin -->
+    <!-- OR as a jQuery plugin -->
     <script src="../jquery-aop-0.5.1.min.js"></script>
 ```
 
