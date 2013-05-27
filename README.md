@@ -31,17 +31,26 @@ An aspect definition takes a target function and some advices, returning a new f
     }
 
     // Aspect
-    var myProxy = AOP.aspect(myFunction).before(myAdvice);
+    
+    var myProxy = AOP.aspect(myFunction).after(myAdvice); // standalone
+    
+    // OR as a jQuery plugin
+    // var myProxy = $.aop.aspect(myFunction).after(myAdvice);
 
     myProxy();
 ```
 #####Output
 ```
-myAdvice
 myFunction
+myAdvice
 ```
 
-Advices can be of type *before*, *after*, *afterReturning*, *afterThrowing* and *around*. The next jQuery friendly aliases are provided: *complete* (after), *success* (afterReturning) and *error* (afterThrowing).
+Advices can be of type *before*, *after*, *afterReturning*, *afterThrowing* and *around*. Some jQuery friendly aliases are also provided: *complete* (after), *success* (afterReturning) and *error* (afterThrowing). In the next example both proxies have exactly the same beahaviour
+#####Input
+```javascript
+    var myProxy1 = AOP.aspect(myFunction).after(myAdvice);
+    var myProxy2 = AOP.aspect(myFunction).complete(myAdvice);
+```
 
 Aspect definitions can also take a target object method. In that case we provide also the target object to allow the normal use of *this* inside the method.
 
