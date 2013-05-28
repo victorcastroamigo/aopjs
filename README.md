@@ -8,10 +8,10 @@ Add the script to your page as a standalone library **OR** after jQuery if you p
 
 ```html
     <!-- standalone-->
-    <script src="../aop-0.5.1.min.js"></script>
+    <script src="../aop-0.5.3.min.js"></script>
 
     <!-- OR as a jQuery plugin -->
-    <script src="../jquery-aop-0.5.1.min.js"></script>
+    <script src="../jquery-aop-0.5.3.min.js"></script>
 ```
 
 Functionallity is accesible in the global variable AOP if used as a standalone library or in $.aop if used as a jQuery plugin.
