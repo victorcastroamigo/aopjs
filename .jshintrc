@@ -57,6 +57,7 @@
     "devel": false,
     "dojo": false,
     "jquery": true,
+    "angular": true,
     "mootools": false,
     "node": false,
     "nonstandard": false,

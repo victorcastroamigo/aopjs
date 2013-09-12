@@ -2,7 +2,7 @@
 
     "use strict";
 
-    angular.module("aopjs",[]).service("aopjs",[function(){
+    angular.module("aopjs", []).service("aopjs", [function (){
         var aop = global.AOP;
         aop.noConflict();
         this.aop = aop;
