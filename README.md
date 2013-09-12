@@ -12,6 +12,7 @@ Add the script to your page as a standalone library **OR** after jQuery if you p
 
     <!-- OR as a jQuery plugin -->
     <script src="../jquery-aop-0.5.3.min.js"></script>
+    angular code please review: http://jsbin.com/OyadaBu/3/edit
 ```
 
 Functionallity is accesible in the global variable AOP if used as a standalone library or in $.aop if used as a jQuery plugin.
