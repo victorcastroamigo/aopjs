@@ -2,10 +2,10 @@
 
     "use strict";
 
-    angular.module("aopjs",[]).factory("aopjs",[function(){
+    angular.module("aopjs",[]).service("aopjs",[function(){
         var aop = global.AOP;
         aop.noConflict();
-        return aop;
+        this.aop = aop;
     }]);
 
 }(angular, this));
