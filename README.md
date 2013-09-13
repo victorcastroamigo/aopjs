@@ -1,10 +1,10 @@
-## AopJS [![Build Status](https://travis-ci.org/victorcastroamigo/aopjs.png?branch=master)](https://travis-ci.org/victorcastroamigo/aopjs)
+## AopJS [![Build Status](https://travis-ci.org/greengerong/aopjs.png?branch=master)](https://travis-ci.org/greengerong/aopjs)
 
-###### A minimalistic aspect oriented javascript programming library and jQuery plugin.
+###### A minimalistic aspect oriented javascript programming library and jQuery, angualr plugin.
 
 #### Getting started
 
-Add the script to your page as a standalone library **OR** after jQuery if you plan to use it as a plugin. You can download it from the dist folder.
+Add the script to your page as a standalone library **OR** after jQuery，angular if you plan to use it as a plugin. You can download it from the dist folder.
 
 ```html
     <!-- standalone-->
@@ -12,6 +12,8 @@ Add the script to your page as a standalone library **OR** after jQuery if you p
 
     <!-- OR as a jQuery plugin -->
     <script src="../jquery-aop-0.5.3.min.js"></script>
+    
+    angular code please review: http://jsbin.com/OyadaBu/3/edit
 ```
 
 Functionallity is accesible in the global variable AOP if used as a standalone library or in $.aop if used as a jQuery plugin.
@@ -216,3 +218,5 @@ Another advanced technique would be the use of currying to create parameterized 
 ```
 logAdvice
 ```
+
+
