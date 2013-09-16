@@ -1,4 +1,4 @@
-## AopJS [![Build Status](https://travis-ci.org/greengerong/aopjs.png?branch=master)](https://travis-ci.org/greengerong/aopjs)
+## AopJS [![Build Status](https:/travis-ci.org/victorcastroamigo/aopjs.png?branch=master)](https://travis-ci.org/victorcastroamigo/aopjs)
 
 ###### A minimalistic aspect oriented javascript programming library and jQuery, angualr plugin.
 
