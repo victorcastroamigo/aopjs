@@ -37,6 +37,10 @@ module.exports = function (grunt) {
             extras: {
               src: ["src/aop.js", "src/jquery-aop.js"],
               dest: 'dist/jquery-<%= pkg.name %>-<%= pkg.version %>.js'
+            },
+             extrasAngular: {
+              src: ["src/aop.js", "src/angular-aop.js"],
+              dest: 'dist/angular-<%= pkg.name %>-<%= pkg.version %>.js'
             }
         },
 
@@ -50,7 +54,8 @@ module.exports = function (grunt) {
             all: {
                 files: {
                     "dist/<%= pkg.name %>-<%= pkg.version %>.min.js": ["<%= concat.basic.dest %>"],                    
-                    "dist/jquery-<%= pkg.name %>-<%= pkg.version %>.min.js": ["<%= concat.extras.dest %>"]
+                    "dist/jquery-<%= pkg.name %>-<%= pkg.version %>.min.js": ["<%= concat.extras.dest %>"],
+                    "dist/angular-<%= pkg.name %>-<%= pkg.version %>.min.js": ["<%= concat.extrasAngular.dest %>"]
                 }
             }
         },
