@@ -1,10 +1,10 @@
-## AopJS [![Build Status](https:/travis-ci.org/victorcastroamigo/aopjs.png?branch=master)](https://travis-ci.org/victorcastroamigo/aopjs)
+## AopJS [![Build Status](https://travis-ci.org/victorcastroamigo/aopjs.png?branch=master)](https://travis-ci.org/victorcastroamigo/aopjs)
 
-###### A minimalistic aspect oriented javascript programming library and jQuery, angualr plugin.
+###### A minimalistic aspect oriented javascript programming library and jQuery/angular plugin.
 
 #### Getting started
 
-Add the script to your page as a standalone library **OR** after jQuery，angular if you plan to use it as a plugin. You can download it from the dist folder.
+Add the script to your page as a standalone library **OR** after jQuery/angular if you plan to use it as a plugin. You can download it from the dist folder.
 
 ```html
     <!-- standalone-->
