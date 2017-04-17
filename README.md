@@ -20,7 +20,7 @@ Functionallity is accesible in the global variable AOP if used as a standalone l
 
 An aspect definition takes a target function and some advices, returning a new function with the new expected behaviour.
 
-#####Input
+##### Input
 ```javascript
     // Target function
     function myFunction() {
@@ -41,14 +41,14 @@ An aspect definition takes a target function and some advices, returning a new f
 
     myProxy();
 ```
-#####Output
+##### Output
 ```
 myFunction
 myAdvice
 ```
 
 Advices can be of type *before*, *after*, *afterReturning*, *afterThrowing* and *around*. Some jQuery friendly aliases are also provided: *complete* (after), *success* (afterReturning) and *error* (afterThrowing). In the next example both proxies have exactly the same beahaviour
-#####Input
+##### Input
 ```javascript
     var myProxy1 = AOP.aspect(myFunction).after(myAdvice);
     var myProxy2 = AOP.aspect(myFunction).complete(myAdvice);
@@ -56,7 +56,7 @@ Advices can be of type *before*, *after*, *afterReturning*, *afterThrowing* and 
 
 Aspect definitions can also take a target object method. In that case we provide also the target object to allow the normal use of *this* inside the method.
 
-#####Input
+##### Input
 ```javascript
     var myObject = {
         myMethod: function () {
@@ -68,7 +68,7 @@ Aspect definitions can also take a target object method. In that case we provide
 
 When aspect definitions take just a target object all the methods in the object get decorated.
 
-#####Input
+##### Input
 ```javascript
     var myObject = {
         myMethod: function () {
@@ -88,7 +88,7 @@ When aspect definitions take just a target object all the methods in the object 
     myObject.myMethod();
     myObject.myOtherMethod();
 ```
-#####Output
+##### Output
 ```
 myMethod
 myAdvice
@@ -98,7 +98,7 @@ myAdvice
 
 Advices can be chained, being the closest to the target function in the definition  also the closest in the execution stack.
 
-#####Input
+##### Input
 ```javascript
     var myProxy = AOP.aspect(myFunction)
                         .before(myAdvice1)
@@ -108,7 +108,7 @@ Advices can be chained, being the closest to the target function in the definiti
 
 Advices can also be precompiled, but it is just a matter of taste, when not precompiled, advices cache their own proxy.
 
-#####Input
+##### Input
 ```javascript    
     var myAdvice = AOP.around(function(target, args) {
 
@@ -142,7 +142,7 @@ In the previous example an around advice is used to do something before and afte
 
 Other types of advices have access to target, args and retval too.
 
-#####Input
+##### Input
 ```javascript
     var add = AOP.aspect(function (arg1, arg2) {
             return arg1 + arg2;
@@ -153,7 +153,7 @@ Other types of advices have access to target, args and retval too.
         }),
         returnValue = add(2, 3); // returnValue == 5
 ```
-#####Output
+##### Output
 ```
 2 + 3 = 5
 ```
@@ -162,7 +162,7 @@ Other types of advices have access to target, args and retval too.
 
 Every advice definition method can take a variable number of functions.
 
-#####Input
+##### Input
 ```javascript
     var myProxy = AOP.aspect(myFunction)
                         .after(myAdvice1, myAdvice2),
@@ -175,7 +175,7 @@ Both calls in the previous example produce the same output. Also remember that m
 
 As stated earlier, precompiling the advices is not a matter of performance but a matter of taste. Still it is rather useful to create advice compositions.
 
-#####Input
+##### Input
 ```javascript
 
     var aroundComposite = AOP.advice()
@@ -203,7 +203,7 @@ In the previous example both the aroundComposite and the aroundPrecompiledCompos
 
 Another advanced technique would be the use of currying to create parameterized advices.
 
-#####Input
+##### Input
 ```javascript
     function logAdvice(logger) {
         return logger.log("logAdvice");
@@ -214,7 +214,7 @@ Another advanced technique would be the use of currying to create parameterized 
 
     myProxy();
 ```
-#####Output
+##### Output
 ```
 logAdvice
 ```
